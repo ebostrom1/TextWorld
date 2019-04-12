@@ -24,8 +24,8 @@ public class Graph {
         nodes.get(name1).addNeighbor(nodes.get(name2));
     }
     public void addUndirectedEdge(String name1, String name2){
-        nodes.get(name1).addNeighbor(nodes.get(name2));
-        nodes.get(name2).addNeighbor(nodes.get(name1));
+        addDirectedEdge(name1, name2);
+        addDirectedEdge(name2, name1);
     }
     public Node getNode(String name){
         return nodes.get(name);
@@ -51,13 +51,12 @@ public class Graph {
         HashMap<Integer, Creature> creatures =  currentRoom.getCreatures();
         creatures.remove(creature);
         nodes.get(nextNode).addCreature(creature);
-//        nodes.get(creature.getCurrentRoom()).getCreatures().remove(creature);
-//        nodes.get(nextNode).addCreature(creature);
     }
     public void movePlayer(String response, Player player) {
         String[] s = response.split("\\.");
         String nextNode = s[1];
-        nodes.get(player.getCurrentPosition()).getCreatures().remove(player);
+        Node currentPosition = player.getCurrentPosition();
+        currentPosition.getCreatures().remove(player);
         nodes.get(nextNode).addPlayer(player);
     }
     public void fillWithCreatures(int chickens, int popStars, int wumpuses) {
@@ -85,6 +84,7 @@ public class Graph {
                 if (response.equals("look")) printMoveOptions(entry.getValue());
                 if (response.startsWith("go")) movePlayer(response, entry.getValue());
                 if (response.startsWith("pickUp")) entry.getValue().pickupItem(response.split(".")[1]);
+                if (response.startsWith("getLocation")) System.out.println(entry.getValue().getCurrentPosition());
             }
         }
     }

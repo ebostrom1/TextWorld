@@ -87,5 +87,12 @@ public class Node {
     public Creature removeCreature(Integer index) {
         return Creatures.remove(index);
     }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                 name +
+                '}';
+    }
 }
 
