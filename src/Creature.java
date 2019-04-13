@@ -13,6 +13,7 @@ public abstract class Creature {
     }
 
     protected void move(String nextRoom){
+        if(currentRoom.getNeighborNode(nextRoom) != null)
             world.moveCreature(nextRoom,this);
             currentRoom = currentRoom.getNeighborNode(nextRoom);
     }

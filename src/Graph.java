@@ -44,9 +44,6 @@ public class Graph {
         return false;
     }
     public void moveCreature(String nextNode, Creature creature){
-        if((creature.getCurrentRoom()).getCreatures().containsValue(creature)){
-            System.out.println("no such creature in current node");
-        }
         Node currentRoom = creature.getCurrentRoom();
         HashMap<Integer, Creature> creatures =  currentRoom.getCreatures();
         creatures.remove(creature);
